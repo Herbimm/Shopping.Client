@@ -1,6 +1,69 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewBag.Title = "Home Page";
 }
-<h1>@ViewData["Title"]</h1>
+<style>
+    .d-none {
+        display: none;
+    }
+</style>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+
+
+@using (@Html.BeginForm("Teste", "Home", FormMethod.Get)){
+
+<h2>Generate QR Code</h2>
+<br /><br /><br />
+<div class="row">
+    <div class="col-lg-4">
+        <div class="form-group">
+            <label>Enter Something to generate QR Code</label>
+            <input id="QRInput" type="text" required class="form-control" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-1">
+        <button class="btn btn-primary" @*id="GenerateQR"*@>Generate</button>
+    </div>
+</div>
+<br /><br /><br />
+<div class="row">
+    <div class="col-lg-4">
+        <img id="QRImg" alt="QRImage" class="d-none" width="100" height="100" />
+    </div>
+</div>
+
+}
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $('#GenerateQR').click(function () {
+                alert('ok');
+                if ($('#QRInput').val() != '') {
+                    $.ajax({
+                        url: '/Home/GenerateQRCode',
+                        data: { 'QRString': $('#QRInput').val() },
+                        success: function (res) {
+                            debugger
+                            if (res != null && res != '' && res != 'undefined') {
+                                $('#QRImg').removeClass('d-none');
+                                $('#QRImg').attr('src', res);
+                            }
+                            else {
+                                $('#QRImg').addClass('d-none');
+                            }
+                        },
+                        error: function () {
+                            alert('Something went wrong.');
+                        }
+                    });
+                }
+                else {
+                    $('#QRImg').addClass('d-none');
+                    alert('Please enter something to generate QR Code');
+                }
+            });
+            
+        });
+    </script>*@
