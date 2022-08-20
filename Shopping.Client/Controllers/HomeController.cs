@@ -33,7 +33,7 @@ namespace Shopping.Client.Controllers
             //var content = await response.Content.ReadAsStringAsync();
             //return View(JsonConvert.DeserializeObject<IEnumerable<Product>>(content));
 
-            return View();
+            return View(new List<Product>());
         }
         public IActionResult GenerateQRCode(string QRString)
         {
@@ -51,13 +51,12 @@ namespace Shopping.Client.Controllers
             }
         }
 
-        public IActionResult Teste()
+        public IActionResult GerarImagemQrCode(string chave)
         {
-            string testeQr = "testeQr";
             using (MemoryStream ms = new MemoryStream())
             {
                 QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(testeQr, QRCodeGenerator.ECCLevel.Q);
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode(chave, QRCodeGenerator.ECCLevel.Q);
                 QRCode qrCode = new QRCode(qrCodeData);
                 Bitmap bitMap = qrCode.GetGraphic(20);
                 bitMap.Save(ms, ImageFormat.Png);
